@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SaveUserRequest extends FormRequest
@@ -24,8 +24,9 @@ class SaveUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5',
-            'password' => 'required|same:password',
+            'name'                  => 'required|min:5',
+            'username'              => 'required|unique:users,username,'.Auth::user()->id, 
+            'password'              => 'required|same:password',
             'password_confirmation' => 'required|same:password',
         ];
     }

@@ -32,25 +32,11 @@
 
                                 @if ($errors->has('body'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('tag_title') }}</strong>
+                                        <strong>{{ $errors->first('body') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('tag_title') ? ' has-error' : '' }}">
-                            <label for="tag_title" class="col-md-4 control-label">Tags</label>
-
-                            <div class="col-md-6">
-                                <input id="tag_title" type="text" class="form-control" name="tag_title"  required />
-
-                                @if ($errors->has('tag_title'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tag_title') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

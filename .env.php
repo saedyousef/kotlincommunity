@@ -1,6 +1,0 @@
-<?php
-
-return [
-	'GITHUB_CLIENT_ID' 		=> '0a1c528fcee9ba5c3ac9',
-	'GITHUB_CLIENT_SECRET'	=> '3124f7057f9c6629ec8ab723637d9a4227573d9e'
-];
