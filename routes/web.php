@@ -19,14 +19,15 @@ Route::get('/test', function () {
 });
 Auth::routes();
 
+// Authorized methods
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/posts/add', 'PostsController@get_add_post')->name('get_add_post');
+	Route::get('/users/edit_profile/{id}', 'UsersController@get_edit_profile')->name('get_edit_profile');
+	Route::post('/users/edit_profile/{id}', 'UsersController@edit_profile')->name('edit_profile');
 	Route::post('/posts/add', 'PostsController@add_post')->name('add_post');
 	Route::post('/posts/view/{id}', 'PostsController@add_comment')->name('view_post');
-	Route::post('/posts/post_upvote/{post_id}', 'InterActionsController@post_upvote')->name('post_upvote');
-	Route::post('/posts/post_downvote/{post_id}', 'InterActionsController@post_downvote')->name('post_downvote');
-	Route::post('/comments/comment_downvote/{comment_id}', 'InterActionsController@comment_downvote')->name('comment_downvote');
-	Route::post('/comments/comment_upvote/{comment_id}', 'InterActionsController@comment_upvote')->name('comment_upvote');
+	Route::post('/interactions/downvote/{reference_id}/{reference_type}', 'InterActionsController@downvote')->name('downvote');
+	Route::post('/interactions/upvote/{reference_id}/{reference_type}', 'InterActionsController@upvote')->name('upvote');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

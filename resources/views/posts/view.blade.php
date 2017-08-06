@@ -70,7 +70,7 @@ function upvote(post_id){
     $.ajax({
         type: "POST",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/posts/post_upvote/'+post_id ,
+        url:  '/interactions/upvote/'+post_id+'/1' ,
         success: function (data) {
             console.log(data);
         },
@@ -84,7 +84,7 @@ function downvote(post_id){
     $.ajax({
         type: "POST",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/posts/post_downvote/'+post_id ,
+        url:  '/interactions/downvote/'+post_id+'/1',
         success: function (data) {
             console.log(data);
         },
@@ -98,7 +98,7 @@ function downvote_comment(comment_id){
     $.ajax({
         type: "POST",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/comments/comment_downvote/'+comment_id ,
+        url:  '/interactions/downvote/'+comment_id+'/2' ,
         success: function (data) {
             console.log(data);
         },
@@ -112,7 +112,7 @@ function upvote_comment(comment_id){
     $.ajax({
         type: "POST",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/comments/comment_upvote/'+comment_id ,
+        url:  '/interactions/upvote/'+comment_id+'/2' ,
         success: function (data) {
             console.log(data);
         },
