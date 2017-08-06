@@ -41,14 +41,7 @@ class PostsController extends Controller
         $post->body     = $request->input('body');
         $post->user_id  = Auth::user()->id;
         $post->save();
-
-        //Cretae a new instance of Post model
-        $tag = new Tag();
-
-        $tag->post_id   = $post->id; //Get the inserted post_id and assign it with tags model
-        $tag->title     = $tag_request->input('tag_title');
-        $tag->save();
-
+        
         return redirect()->route('view_post',$post->id);//$this->view_post($post->id);  
     }
 

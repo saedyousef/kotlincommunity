@@ -67,7 +67,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
-                                    <li><a href="#">Edit profile</a></li>
+                                    <li><a href="{{route('get_edit_profile',Auth::user()->id)}}">Edit profile</a></li>
                                 </ul>
                             </li>
                         @endif

@@ -28,7 +28,11 @@ class SocialAuthController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver($provider)->user();
+        try {
+            $user = Socialite::driver($provider)->user();
+        } catch (Exception $e) {
+            return redirect('auth/twitter');
+        }
         
         $user_provider = Provider::where('provider_id', $user->getId())->first();
 

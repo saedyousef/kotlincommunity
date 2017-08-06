@@ -4,24 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\Model\CommentsInteraction;
-use App\Model\PostsInteraction;
+use App\Model\Interaction;
 
 class InterActionsController extends Controller
 {	
-	/**
+
+    /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
-    * @desc Save downvote interaction for users on a comment
+    * @desc Save upovte interactions for posts and comments
     */
-     public function comment_downvote($comment_id)
+    public function upvote($reference_id, $reference_type)
     {
         $conditions = [
-            'user_id' => Auth::user()->id,
-            'comment_id' => $comment_id
+            'user_id'        => Auth::user()->id,
+            'reference_id'   => $reference_id,
+            'reference_type' => $reference_type,
+            'type'           => 1
         ];
 
 
-        $user_interactions = CommentsInteraction::where($conditions)->get();
+        $user_interactions = Interaction::where($conditions)->get();
         $result = [];
         foreach ($user_interactions as $user_interaction) {
             $result[] = $user_interaction->id;
@@ -29,18 +31,19 @@ class InterActionsController extends Controller
         // Check if the user already have voted this post or not
         if(empty($result))
         {
-            $comment_interaction = new CommentsInteraction();
+            $interaction = new Interaction();
 
-            $comment_interaction->user_id = Auth::user()->id;
-            $comment_interaction->comment_id = $comment_id;
-            $comment_interaction->type = 2;
+            $interaction->user_id        = Auth::user()->id;
+            $interaction->reference_id   = $reference_id;
+            $interaction->reference_type = $reference_type;
+            $interaction->type           = 1;
 
-            $comment_interaction->save();
+            $interaction->save();
 
-            return response('Comment Downvoted',200);
+            return response('Upvoted',200);
         }else
         {
-            $interaction  = CommentsInteraction::find($result[0]);
+            $interaction  = Interaction::find($result[0]);
             $interaction->delete();
             return response('Interaction deleted',200);
         }
@@ -49,17 +52,19 @@ class InterActionsController extends Controller
 
     /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
-    * @desc Save upovte interaction for users on a comment
+    * @desc Save downvote interaction for posts and comments
     */
-    public function comment_upvote($comment_id)
+    public function downvote($reference_id, $reference_type)
     {
         $conditions = [
-            'user_id' => Auth::user()->id,
-            'comment_id' => $comment_id
+            'user_id'        => Auth::user()->id,
+            'reference_id'   => $reference_id,
+            'reference_type' => $reference_type,
+            'type'           => 2
         ];
 
 
-        $user_interactions = CommentsInteraction::where($conditions)->get();
+        $user_interactions = Interaction::where($conditions)->get();
         $result = [];
         foreach ($user_interactions as $user_interaction) {
             $result[] = $user_interaction->id;
@@ -67,96 +72,19 @@ class InterActionsController extends Controller
         // Check if the user already have voted this post or not
         if(empty($result))
         {
-            $comment_interaction = new CommentsInteraction();
+            $interaction = new Interaction();
 
-            $comment_interaction->user_id = Auth::user()->id;
-            $comment_interaction->comment_id = $comment_id;
-            $comment_interaction->type = 1;
+            $interaction->user_id        = Auth::user()->id;
+            $interaction->reference_id   = $reference_id;
+            $interaction->reference_type = $reference_id;
+            $interaction->type           = 2;
 
-            $comment_interaction->save();
+            $interaction->save();
 
-            return response('Comment Upvoted',200);
+            return response('Upvoted',200);
         }else
         {
-            $interaction  = CommentsInteraction::find($result[0]);
-            $interaction->delete();
-            return response('Interaction deleted',200);
-        }
-
-    }
-
-    /**
-    * @author Saed Yousef <saed.alzaben@gmail.com>
-    * @desc Save upovte interaction for users on a post
-    */
-    public function post_upvote($post_id)
-    {
-        $conditions = [
-            'user_id' => Auth::user()->id,
-            'post_id' => $post_id,
-            'type' => 1
-        ];
-
-
-        $user_interactions = PostsInteraction::where($conditions)->get();
-        $result = [];
-        foreach ($user_interactions as $user_interaction) {
-            $result[] = $user_interaction->id;
-        }
-        // Check if the user already have voted this post or not
-        if(empty($result))
-        {
-            $post_interaction = new PostsInteraction();
-
-            $post_interaction->user_id = Auth::user()->id;
-            $post_interaction->post_id = $post_id;
-            $post_interaction->type = 1;
-
-            $post_interaction->save();
-
-            return response('Post Upvoted',200);
-        }else
-        {
-            $interaction  = PostsInteraction::find($result[0]);
-            $interaction->delete();
-            return response('Interaction deleted',200);
-        }
-
-    }
-
-    /**
-    * @author Saed Yousef <saed.alzaben@gmail.com>
-    * @desc Save downvote interaction for users on a post
-    */
-    public function post_downvote($post_id)
-    {
-        $conditions = [
-            'user_id' => Auth::user()->id,
-            'post_id' => $post_id,
-            'type' => 2
-        ];
-
-
-        $user_interactions = PostsInteraction::where($conditions)->get();
-        $result = [];
-        foreach ($user_interactions as $user_interaction) {
-            $result[] = $user_interaction->id;
-        }
-        // Check if the user already have voted this post or not
-        if(empty($result))
-        {
-            $post_interaction = new PostsInteraction();
-
-            $post_interaction->user_id = Auth::user()->id;
-            $post_interaction->post_id = $post_id;
-            $post_interaction->type = 2;
-
-            $post_interaction->save();
-
-            return response('Post Downvoted',200);
-        }else
-        {
-            $interaction  = PostsInteraction::find($result[0]);
+            $interaction  = Interaction::find($result[0]);
             $interaction->delete();
             return response('Interaction deleted',200);
         }
