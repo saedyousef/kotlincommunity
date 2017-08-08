@@ -24,9 +24,9 @@ class SaveUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required|min:5',
-            'username'              => 'required|unique:users,username,'.Auth::user()->id,
-            'email'                 => 'required|unique:users,email,'.Auth::user()->id,
+            'name'     => 'required|min:5',
+            'username' => 'required|unique:users,username,'.Auth::user()->id,
+            'email'    => 'required|unique:users,email,'.Auth::user()->id,
 
         ];
     }
