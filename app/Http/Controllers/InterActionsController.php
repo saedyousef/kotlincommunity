@@ -11,6 +11,8 @@ class InterActionsController extends Controller
 
     /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param $reference_id
+    * @param $reference_type
     * @desc Save upovte interactions for posts and comments
     */
     public function upvote($reference_id, $reference_type)
@@ -52,6 +54,8 @@ class InterActionsController extends Controller
 
     /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param $reference_id
+    * @param $reference_type
     * @desc Save downvote interaction for posts and comments
     */
     public function downvote($reference_id, $reference_type)
@@ -81,7 +85,7 @@ class InterActionsController extends Controller
 
             $interaction->save();
 
-            return response('Upvoted',200);
+            return response('Downvoted',200);
         }else
         {
             $interaction  = Interaction::find($result[0]);
