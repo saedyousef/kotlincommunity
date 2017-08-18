@@ -29,8 +29,8 @@ class InterActionsController extends Controller
         $user_interactions = Interaction::where($conditions)->get();
         $result = [];
         foreach ($user_interactions as $user_interaction) {
-            $result[] = $user_interaction->id;
-            $result[] = $user_interaction->type;
+            $result['id']   = $user_interaction->id;
+            $result['type'] = $user_interaction->type;
         }
         $response = [];
         // Check if the user already have voted this post or not
@@ -47,10 +47,10 @@ class InterActionsController extends Controller
             $response = response('Upvoted',200);
         }else
         {   
-            if($result[1] == 2)
+            if($result['type'] == 2)
             {
                 // if this post is already downvote by the same user , then delete the exist action and save a new one
-                $interaction  = Interaction::find($result[0]);
+                $interaction  = Interaction::find($result['id']);
                 $interaction->delete();
 
                 $interaction = new Interaction();
@@ -65,9 +65,9 @@ class InterActionsController extends Controller
             }else
             {
                 // If the user already has upvoted the post or the comment and reclick on the upvote action
-                $interaction  = Interaction::find($result[0]);
+                $interaction  = Interaction::find($result['id']);
                 $interaction->delete();
-                
+
                 $response = response('Interaction deleted',404);
             }
             
@@ -92,8 +92,8 @@ class InterActionsController extends Controller
         $user_interactions = Interaction::where($conditions)->get();
         $result = [];
         foreach ($user_interactions as $user_interaction) {
-            $result[] = $user_interaction->id;
-            $result[] = $user_interaction->type;
+            $result['id']   = $user_interaction->id;
+            $result['type'] = $user_interaction->type;
         }
         $response = [];
         // Check if the user already have voted this post or not
@@ -111,10 +111,10 @@ class InterActionsController extends Controller
             $response = response('Downvoted',200);
         }else
         {   
-            if($result[1] == 1)
+            if($result['type'] == 1)
             {
                 // if this post is already upvote by the same user , then delete the exist action and save a new one
-                $interaction  = Interaction::find($result[0]);
+                $interaction  = Interaction::find($result['id']);
                 $interaction->delete();
 
                 $interaction = new Interaction();
@@ -129,7 +129,7 @@ class InterActionsController extends Controller
             }else
             {
                 // If the user already has downvoted the post or the comment and reclick on the upvote action
-                $interaction  = Interaction::find($result[0]);
+                $interaction  = Interaction::find($result['id']);
                 $interaction->delete();
 
                 $response = response('Interaction deleted',404);
