@@ -20,24 +20,24 @@
             </div>
         </div>
     </div>
-    @foreach($comments as $comment)
+    @foreach($answers as $answer)
     <div class="row">
         <div class="col-md-3">
-            <button id="upvote" class="btn btn-primary" onclick="upvote_comment({{$comment->id}})">Upvote</button>
-            <button id="upvote" class="btn btn-primary" onclick="downvote_comment({{$comment->id}})">DownVote</button>
+            <button id="upvote" class="btn btn-primary" onclick="upvote_answer({{$answer->id}})">Upvote</button>
+            <button id="upvote" class="btn btn-primary" onclick="downvote_answer({{$answer->id}})">DownVote</button>
         </div><br>
-    	<div class="col-md-2">{{$comment->name}}</div>
-        <div class="col-md-2">{{$comment->body}}</div>
-    	<div class="col-md-2"><a target="__blank" href="{{ route('view_user',$comment->username) }}">{{$comment->username}}</a></div>
+    	<div class="col-md-2">{{$answer->name}}</div>
+        <div class="col-md-2">{{$answer->body}}</div>
+    	<div class="col-md-2"><a target="__blank" href="{{ route('view_user',$answer->username) }}">{{$answer->username}}</a></div>
     </div>
     @endforeach
-    {{ $comments->links() }}
+    {{ $answers->links() }}
     <div class="row">
         <div class="col-md-10">
         	<form method="post">
               	{{ csrf_field() }}
         		<div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-                    <label for="title" class="col-md-4 control-label">Comment Body</label>
+                    <label for="title" class="col-md-4 control-label">Answer Body</label>
                     <div class="col-md-6">
                         <textarea id="body"  class="form-control" name="body"  required autofocus>
                         	{{ old('body') }}
@@ -53,7 +53,7 @@
                 <div class="form-group" id="add_comment" style="margin-top: 20px;padding-top: 30px ">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary pull-right" style="margin-top: 10px">
-                            Add Comment
+                            Add Answer
                         </button>
                     </div>
                 </div>
@@ -94,11 +94,11 @@ function downvote(post_id){
     });
 }
 
-function downvote_comment(comment_id){
+function downvote_answer(answer_id){
     $.ajax({
         type: "POST",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/interactions/downvote/'+comment_id+'/2' ,
+        url:  '/interactions/downvote/'+answer_id+'/2' ,
         success: function (data) {
             console.log(data);
         },
@@ -108,11 +108,11 @@ function downvote_comment(comment_id){
     });
 }
 
-function upvote_comment(comment_id){
+function upvote_answer(answer_id){
     $.ajax({
         type: "POST",
         headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/interactions/upvote/'+comment_id+'/2' ,
+        url:  '/interactions/upvote/'+answer_id+'/2' ,
         success: function (data) {
             console.log(data);
         },
