@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CommentsInteraction extends Model
+class Answer extends Model
 {
     //
 }
