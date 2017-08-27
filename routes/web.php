@@ -25,7 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/users/edit_profile/{id}', 'UsersController@get_edit_profile')->name('get_edit_profile');
 	Route::post('/users/edit_profile/{id}', 'UsersController@edit_profile')->name('edit_profile');
 	Route::post('/posts/add', 'PostsController@add_post')->name('add_post');
-	Route::post('/posts/view/{id}', 'PostsController@add_comment')->name('view_post');
+	Route::post('/posts/view/{id}', 'PostsController@add_answer')->name('view_post');
 	Route::post('/interactions/downvote/{reference_id}/{reference_type}', 'InterActionsController@downvote')->name('downvote');
 	Route::post('/interactions/upvote/{reference_id}/{reference_type}', 'InterActionsController@upvote')->name('upvote');
 });
@@ -34,6 +34,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/posts/view/{id}', 'PostsController@view_post')->name('view_post');
 Route::get('/users/{username}', 'UsersController@view_user')->name('view_user');
+Route::get('/score/score/', 'UsersController@showProfile')->name('score');
+
 
 Route::get('login/{provider}', 'SocialAuthController@redirectToProvider')->name('login_with');
 Route::get('login/{provider}/callback', 'SocialAuthController@handleProviderCallback');
