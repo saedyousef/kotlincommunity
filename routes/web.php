@@ -34,7 +34,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/posts/view/{id}', 'PostsController@view_post')->name('view_post');
 Route::get('/users/{username}', 'UsersController@view_user')->name('view_user');
-Route::get('/score/score/', 'UsersController@showProfile')->name('score');
+Route::get('/scores/{user_id}', 'ScoresController@calculate_score')->name('view_score');
+Route::get('/score/score/{user_id}', 'ScoresController@showProfile')->name('score');
 
 
 Route::get('login/{provider}', 'SocialAuthController@redirectToProvider')->name('login_with');
