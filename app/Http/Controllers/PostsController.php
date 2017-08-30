@@ -103,8 +103,6 @@ class PostsController extends Controller
         }
         else
             return response('Post not found', 404);
-            
-
     }
 
 }
