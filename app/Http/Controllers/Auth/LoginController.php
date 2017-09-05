@@ -36,4 +36,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // Override the username method to login with username or email
+    public function username()
+    {
+       $username = request()->input('login');
+       
+       $field = filter_var($username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+       request()->merge([$field => $username]);
+
+       return $field;
+    }
 }
