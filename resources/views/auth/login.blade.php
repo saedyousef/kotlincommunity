@@ -11,10 +11,10 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 control-label">Username</label>
+                            <label for="username" class="col-md-4 control-label">Username or email address</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                                <input id="username" type="username" class="form-control" name="login" value="{{ old('username') }}" required autofocus placeholder="Enter Your Username or email">
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
