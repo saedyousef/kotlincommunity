@@ -12,8 +12,23 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    <!-- Simplemde - Markdown Editor-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+    </script>
 </head>
 <body>
     <div id="app">
@@ -80,7 +95,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{asset('js/tinymce/js/tinymce/tinymce.min.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
     </body>

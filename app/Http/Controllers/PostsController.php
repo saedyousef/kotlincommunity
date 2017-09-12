@@ -8,6 +8,7 @@ use App\Model\Post;
 use App\Model\Answer;
 use App\Model\Comment;
 use App\User;
+use Markdown;
 use App\Model\Views;
 use Illuminate\Http\Request;
 use App\Http\Requests\SavePostRequest;
@@ -66,6 +67,7 @@ class PostsController extends Controller
         }else
         {
             $data['posts'] = $post;
+            $data['post_body'] = Markdown::convertToHtml($post->body);
             $user = User::find($post->user_id);
             $data['user'] = $user;
 

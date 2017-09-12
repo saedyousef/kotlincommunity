@@ -12,7 +12,7 @@
 
 
                 <div class="panel-body">
-                    {!!$posts->body!!}
+                    {!! nl2br($post_body)!!}
                 </div>
     <button id="upvote" class="btn btn-primary" onclick="upvote({{$posts->id}})">Upvote</button>
     <button id="upvote" class="btn btn-primary" onclick="downvote({{$posts->id}})">DownVote</button>
