@@ -27,8 +27,7 @@
                             <label for="body" class="col-md-4 control-label">Body</label>
 
                             <div class="col-md-6">
-                                <input id="body" type="text" name="body"   autofocus="true"
-                                	value="{{ old('body') }}">
+                                <textarea id="body" name="body" autofocus="true">{{ old('body') }}</textarea>
 
                                 @if ($errors->has('body'))
                                     <span class="help-block">
@@ -53,12 +52,20 @@
 </div>
 @endsection
 @section('load_scripts')
-<script type="text/javascript">
-tinymce.init({
-    selector: 'input#body',
-    
-     
-});
+    <script type="text/javascript">
+        var simplemde = new SimpleMDE({
+            element: document.getElementById("body"),
+            showIcons: ["code", "table"],
+            spellChecker: true,
+            renderingConfig: {
+                codeSyntaxHighlighting: true,
+            },
+            toolbar: [ "bold", "italic", "|", "link", "code", "quote", "|", "unordered-list", "ordered-list", "|","preview", "clean-block",
+
+                "|", // Separator
+                
+            ],
+        });
     </script>
 @endsection
 

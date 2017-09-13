@@ -24,7 +24,7 @@ class SaveAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required|min:15'
+            'body' => 'required'
         ];
     }
 }

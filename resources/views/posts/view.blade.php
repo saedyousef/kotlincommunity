@@ -12,7 +12,7 @@
 
 
                 <div class="panel-body">
-                    {!!$posts->body!!}
+                    {!! $post_body!!}
                 </div>
     <button id="upvote" class="btn btn-primary" onclick="upvote({{$posts->id}})">Upvote</button>
     <button id="upvote" class="btn btn-primary" onclick="downvote({{$posts->id}})">DownVote</button>
@@ -27,27 +27,24 @@
             <button id="upvote" class="btn btn-primary" onclick="downvote_answer({{$answer->id}})">DownVote</button>
         </div><br>
     	<div class="col-md-2">{{$answer->name}}</div>
-        <div class="col-md-2">{{$answer->body}}</div>
+        <div class="col-md-2">{!! Markdown::convertToHtml($answer->body) !!}</div>
     	<div class="col-md-2"><a target="__blank" href="{{ route('view_user',$answer->username) }}">{{$answer->username}}</a></div>
     </div>
     @endforeach
     {{ $answers->links() }}
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
         	<form method="post">
               	{{ csrf_field() }}
         		<div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                     <label for="title" class="col-md-4 control-label">Answer Body</label>
-                    <div class="col-md-6">
-                        <textarea id="body"  class="form-control" name="body"  required autofocus>
-                        	{{ old('body') }}
-                        </textarea>
-
-                        @if ($errors->has('body'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('body') }}</strong>
-                            </span>
-                        @endif
+                    <div class="col-md-8">
+                         <textarea id="body" name="body" autofocus="true">{{ old('body') }}</textarea>
+                            @if ($errors->has('body'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('body') }}</strong>
+                                </span>
+                            @endif
                     </div>
                 </div>
                 <div class="form-group" id="add_comment" style="margin-top: 20px;padding-top: 30px ">
@@ -121,5 +118,19 @@ function upvote_answer(answer_id){
         }
     });
 }
+
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("body"),
+        showIcons: ["code", "table"],
+        spellChecker: true,
+        renderingConfig: {
+            codeSyntaxHighlighting: true,
+        },
+        toolbar: [ "bold", "italic", "|", "link", "code", "quote", "|", "unordered-list", "ordered-list", "|","preview", "clean-block",
+
+            "|", // Separator
+            
+        ],
+    });
 </script>
 @endsection
