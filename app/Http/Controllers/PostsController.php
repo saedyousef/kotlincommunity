@@ -37,7 +37,7 @@ class PostsController extends Controller
         $post = new Post();
 
         $post->title    = $request->input('title');
-        $post->body     = $request->input('body');
+        $post->body     = strip_tags($request->input('body'));
         $post->user_id  = Auth::user()->id;
         $post->save();
         
@@ -75,7 +75,7 @@ class PostsController extends Controller
                 ->join('users', 'answers.user_id', '=', 'users.id')
                 ->select('users.*','answers.*')
                 ->where('post_id', $id)
-                ->paginate(5);
+                ->paginate(15);
 
             // Save the view for this post   
             $this->save_views($id);
@@ -98,7 +98,7 @@ class PostsController extends Controller
     {
         $answer = new Answer(); // Create new instance from model
 
-        $answer->body = $request->input('body');
+        $answer->body = strip_tags($request->input('body'));
         $answer->user_id  = Auth::user()->id;
         $answer->post_id  = $post_id;
 
