@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/users/edit_profile/{id}', 'UsersController@edit_profile')->name('edit_profile');
 	Route::post('/posts/add', 'PostsController@add_post')->name('add_post');
 	Route::post('/posts/view/{id}', 'PostsController@add_answer')->name('view_post');
-	Route::post('/interactions/downvote/{reference_id}/{reference_type}', 'InterActionsController@downvote')->name('downvote');
-	Route::post('/interactions/upvote/{reference_id}/{reference_type}', 'InterActionsController@upvote')->name('upvote');
+	Route::post('/interactions/downvote/{reference_id}/{user_id}/{reference_type}', 'InterActionsController@downvote')->name('downvote');
+	Route::post('/interactions/upvote/{reference_id}/{user_id}/{reference_type}', 'InterActionsController@upvote')->name('upvote');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -53,6 +53,8 @@
 @endsection
 @section('load_scripts')
     <script type="text/javascript">
+
+        // Initialize "Simplemde" Markdown editor
         var simplemde = new SimpleMDE({
             element: document.getElementById("body"),
             showIcons: ["code", "table"],
