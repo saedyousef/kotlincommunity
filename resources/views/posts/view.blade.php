@@ -63,62 +63,88 @@
 @section('load_scripts')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script type="text/javascript">
-function upvote(post_id, user_id){
-    $.ajax({
-        type: "POST",
-        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/interactions/upvote/'+post_id+'/'+user_id+'/1' ,
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-    });
-}
 
-function downvote(post_id, user_id){
-    $.ajax({
-        type: "POST",
-        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/interactions/downvote/'+post_id+'/'+user_id+'/1',
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-    });
-}
+    /**
+    * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param post_id
+    * @param user_id
+    * @return Upvote for post
+    */
+    function upvote(post_id, user_id){
+        $.ajax({
+            type: "POST",
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:  '/interactions/upvote/'+post_id+'/'+user_id+'/1' ,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
 
-function downvote_answer(answer_id, user_id){
-    $.ajax({
-        type: "POST",
-        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/interactions/downvote/'+answer_id+'/'+user_id+'/2' ,
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-    });
-}
+    /**
+    * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param post_id
+    * @param user_id
+    * @return Downvote for post
+    */
+    function downvote(post_id, user_id){
+        $.ajax({
+            type: "POST",
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:  '/interactions/downvote/'+post_id+'/'+user_id+'/1',
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
 
-function upvote_answer(answer_id, user_id){
-    $.ajax({
-        type: "POST",
-        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url:  '/interactions/upvote/'+answer_id+'/'+user_id+'/2' ,
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-    });
-}
+    /**
+    * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param answer_id
+    * @param user_id
+    * @return Downvote for answer
+    */
+    function downvote_answer(answer_id, user_id){
+        $.ajax({
+            type: "POST",
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:  '/interactions/downvote/'+answer_id+'/'+user_id+'/2' ,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
 
+    /**
+    * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param answer_id
+    * @param user_id
+    * @return Upvote for answer
+    */
+    function upvote_answer(answer_id, user_id){
+        $.ajax({
+            type: "POST",
+            headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url:  '/interactions/upvote/'+answer_id+'/'+user_id+'/2' ,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
+
+    // Initialize "Simplemde" Markdown editor
     var simplemde = new SimpleMDE({
         element: document.getElementById("body"),
         showIcons: ["code", "table"],
