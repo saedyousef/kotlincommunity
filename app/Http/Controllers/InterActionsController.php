@@ -8,7 +8,7 @@ use App\Model\Interaction;
 
 /**
 * @author Saed Yousef <saed.alzaben@gmail.com>
-* @desc   Interactions controllers to handle all related actions to the downvote and upvote
+* Interactions controllers to handle all related actions to the downvote and upvote
 */
 
 class InterActionsController extends Controller
@@ -16,9 +16,9 @@ class InterActionsController extends Controller
 
     /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
-    * @desc   Save upovte interactions for posts and comments
+    * @return   Save upovte interactions for posts and comments
     */
-    public function upvote($reference_id, $reference_type)
+    public function upvote($reference_id, $user_id, $reference_type)
     {
         $conditions = [
             'user_id'        => Auth::user()->id,
@@ -69,15 +69,16 @@ class InterActionsController extends Controller
             }
             
         }
+        $this->recalculate_scores($user_id);
 
         return $response;
     }
 
     /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
-    * @desc   Save downvote interaction for posts and comments
+    * @return   Save downvote interaction for posts and comments
     */
-    public function downvote($reference_id, $reference_type)
+    public function downvote($reference_id, $user_id, $reference_type)
     {
         $conditions = [
             'user_id'        => Auth::user()->id,
@@ -129,12 +130,13 @@ class InterActionsController extends Controller
             }
 
         }
+        $this->recalculate_scores($user_id);
         return $response;
     }
     /**
     * @author Saed Yousef <saed.alzaben@gmail.com>
     * @param  $id of an interaction
-    * @desc   delete interaction
+    * @return   delete interaction
     */
     public function delete_interaction($id)
     {
@@ -142,6 +144,17 @@ class InterActionsController extends Controller
         $interaction->delete();
 
         return response('Interaction deleted',404);
+    }
+
+    /**
+    * @author Saed Yousef <saed.alzaben@gmail.com>
+    * @param  $user_id
+    * @return calucluate score function
+    */
+    public function recalculate_scores($user_id)
+    {
+        // Call the calculate_score function form ScoresController
+        app('App\Http\Controllers\ScoresController')->calculate_score($user_id);
     }
 
 }
